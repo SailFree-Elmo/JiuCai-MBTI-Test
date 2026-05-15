@@ -1,0 +1,56 @@
+<!-- pages/question/question.wxml - 答题页模板 -->
+<view class="container {{animationClass}}">
+  <!-- 进度条区域 -->
+  <view class="progress-section">
+    <view class="progress-info">
+      <text class="progress-text">{{currentIndex + 1}} / {{totalQuestions}}</text>
+      <text class="progress-hint">耐心作答，答案无对错</text>
+    </view>
+    <view class="progress-bar-bg">
+      <view class="progress-bar-fill" style="width: {{progress}}%"></view>
+    </view>
+  </view>
+
+  <!-- 题目区域 -->
+  <view class="question-section {{showTransition ? 'slide-out' : 'slide-in'}}">
+    <!-- 维度标签 -->
+    <view class="dimension-tag">
+      <text class="dimension-text">{{currentQuestion.dimension === 'EI' ? 'E/I 社交维度' : currentQuestion.dimension === 'SN' ? 'S/N 认知维度' : currentQuestion.dimension === 'TF' ? 'T/F 决策维度' : 'J/P 生活方式'}}</text>
+    </view>
+
+    <!-- 题目文字 -->
+    <view class="question-card card">
+      <text class="question-number">Q{{currentIndex + 1}}</text>
+      <text class="question-text">{{currentQuestion.question}}</text>
+    </view>
+
+    <!-- 选项区域 -->
+    <view class="options-section">
+      <!-- 选项A -->
+      <view
+        class="option-card {{selectedOption === 1 ? 'option-active-a' : ''}} {{optionATransition}}"
+        bindtap="selectOption"
+        data-option="{{1}}"
+      >
+        <view class="option-indicator indicator-a">
+          <text class="indicator-text">A</text>
+        </view>
+        <text class="option-text">{{currentQuestion.optionA.text}}</text>
+        <view class="option-check" wx:if="{{selectedOption === 1}}">✓</view>
+      </view>
+
+      <!-- 选项B -->
+      <view
+        class="option-card {{selectedOption === 2 ? 'option-active-b' : ''}} {{optionBTransition}}"
+        bindtap="selectOption"
+        data-option="{{2}}"
+      >
+        <view class="option-indicator indicator-b">
+          <text class="indicator-text">B</text>
+        </view>
+        <text class="option-text">{{currentQuestion.optionB.text}}</text>
+        <view class="option-check" wx:if="{{selectedOption === 2}}">✓</view>
+      </view>
+    </view>
+  </view>
+</view>

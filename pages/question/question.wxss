@@ -1,0 +1,260 @@
+/* pages/question/question.wxss - 答题页样式 */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 30rpx 32rpx;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #0f0f23 0%, #111128 100%);
+}
+
+/* 进度条区域 */
+.progress-section {
+  margin-bottom: 40rpx;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.progress-text {
+  font-size: 28rpx;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.progress-hint {
+  font-size: 24rpx;
+  color: var(--color-text-muted);
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8rpx;
+  background: rgba(7, 193, 96, 0.15);
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+  border-radius: 4rpx;
+  transition: width 0.4s ease;
+}
+
+/* 题目区域 */
+.question-section {
+  flex: 1;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.question-section.slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.question-section.slide-out {
+  animation: slideOut 0.2s ease-in forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(60rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-60rpx);
+  }
+}
+
+/* 维度标签 */
+.dimension-tag {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(7, 193, 96, 0.1);
+  border: 1rpx solid rgba(7, 193, 96, 0.25);
+  border-radius: 20rpx;
+  padding: 8rpx 24rpx;
+  margin-bottom: 24rpx;
+  align-self: flex-start;
+}
+
+.dimension-text {
+  font-size: 22rpx;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* 题目卡片 */
+.question-card {
+  position: relative;
+  background: var(--color-bg-card);
+  border-radius: 24rpx;
+  padding: 48rpx 40rpx;
+  margin-bottom: 36rpx;
+  border: 1rpx solid var(--color-border);
+}
+
+.question-number {
+  display: inline-block;
+  font-size: 24rpx;
+  color: var(--color-gold);
+  font-weight: 700;
+  margin-bottom: 16rpx;
+  letter-spacing: 2rpx;
+}
+
+.question-text {
+  display: block;
+  font-size: 36rpx;
+  color: var(--color-text-primary);
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* 选项区域 */
+.options-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.option-card {
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-card);
+  border: 2rpx solid var(--color-border);
+  border-radius: 20rpx;
+  padding: 32rpx 28rpx;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.option-card:active {
+  transform: scale(0.98);
+}
+
+/* 选项A选中 */
+.option-active-a {
+  border-color: var(--color-primary);
+  background: rgba(7, 193, 96, 0.1);
+  box-shadow: 0 4rpx 16rpx rgba(7, 193, 96, 0.2);
+}
+
+/* 选项B选中 */
+.option-active-b {
+  border-color: var(--color-gold);
+  background: rgba(245, 166, 35, 0.1);
+  box-shadow: 0 4rpx 16rpx rgba(245, 166, 35, 0.2);
+}
+
+.option-selected {
+  animation: optionPop 0.3s ease-out;
+}
+
+@keyframes optionPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 选项指示器 */
+.option-indicator {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.indicator-a {
+  background: rgba(7, 193, 96, 0.15);
+  border: 2rpx solid rgba(7, 193, 96, 0.4);
+}
+
+.indicator-b {
+  background: rgba(245, 166, 35, 0.15);
+  border: 2rpx solid rgba(245, 166, 35, 0.4);
+}
+
+.indicator-text {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.option-active-a .indicator-a {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.option-active-a .indicator-a .indicator-text {
+  color: #ffffff;
+}
+
+.option-active-b .indicator-b {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+.option-active-b .indicator-b .indicator-text {
+  color: #1a1a2e;
+}
+
+/* 选项文字 */
+.option-text {
+  flex: 1;
+  font-size: 30rpx;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+/* 选中勾 */
+.option-check {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 700;
+  margin-left: 12rpx;
+  flex-shrink: 0;
+  color: #ffffff;
+}
+
+.option-active-a .option-check {
+  background: var(--color-primary);
+}
+
+.option-active-b .option-check {
+  background: var(--color-gold);
+  color: #1a1a2e;
+}

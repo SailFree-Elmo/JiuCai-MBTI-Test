@@ -1,0 +1,149 @@
+<!-- pages/result/result.wxml - 结果页模板 -->
+<view class="container {{animationClass}}">
+  <!-- 顶部庆祝区域 -->
+  <view class="celebration-section">
+    <view class="confetti">🎊</view>
+    <text class="result-label">你的韭菜人格是</text>
+  </view>
+
+  <!-- MBTI类型大展示 -->
+  <view class="type-display" wx:if="{{personality}}">
+    <view class="type-emoji">{{personality.emoji}}</view>
+    <view class="type-code">{{mbtiType}}</view>
+    <view class="type-name">{{personality.name}}</view>
+  </view>
+
+  <!-- 人格解读卡片 -->
+  <view class="description-card card" wx:if="{{personality && showDetail}}">
+    <view class="card-header">
+      <text class="card-title">🌱 人格解读</text>
+    </view>
+    <text class="description-text">{{personality.description}}</text>
+  </view>
+
+  <!-- 维度得分展示 -->
+  <view class="dimensions-card card" wx:if="{{showDetail && dimensionPercent}}">
+    <view class="card-header">
+      <text class="card-title">📊 维度分析</text>
+    </view>
+
+    <!-- E/I 维度 -->
+    <view class="dimension-row">
+      <view class="dimension-labels">
+        <text class="dim-label {{dimensionPercent.E >= dimensionPercent.I ? 'dim-label-active' : ''}}">E 社交型</text>
+        <text class="dim-label {{dimensionPercent.I > dimensionPercent.E ? 'dim-label-active' : ''}}">I 独狼型</text>
+      </view>
+      <view class="dimension-bar-container">
+        <view class="dimension-bar-bg">
+          <view class="dimension-bar-fill bar-green" style="width: {{dimensionPercent.E}}%"></view>
+        </view>
+        <view class="dimension-percent">
+          <text class="percent-text">{{dimensionPercent.E}}%</text>
+          <text class="percent-text">{{dimensionPercent.I}}%</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- S/N 维度 -->
+    <view class="dimension-row">
+      <view class="dimension-labels">
+        <text class="dim-label {{dimensionPercent.S >= dimensionPercent.N ? 'dim-label-active' : ''}}">S 技术型</text>
+        <text class="dim-label {{dimensionPercent.N > dimensionPercent.S ? 'dim-label-active' : ''}}">N 玄学型</text>
+      </view>
+      <view class="dimension-bar-container">
+        <view class="dimension-bar-bg">
+          <view class="dimension-bar-fill bar-green" style="width: {{dimensionPercent.S}}%"></view>
+        </view>
+        <view class="dimension-percent">
+          <text class="percent-text">{{dimensionPercent.S}}%</text>
+          <text class="percent-text">{{dimensionPercent.N}}%</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- T/F 维度 -->
+    <view class="dimension-row">
+      <view class="dimension-labels">
+        <text class="dim-label {{dimensionPercent.T >= dimensionPercent.F ? 'dim-label-active' : ''}}">T 理性型</text>
+        <text class="dim-label {{dimensionPercent.F > dimensionPercent.T ? 'dim-label-active' : ''}}">F 感性型</text>
+      </view>
+      <view class="dimension-bar-container">
+        <view class="dimension-bar-bg">
+          <view class="dimension-bar-fill bar-gold" style="width: {{dimensionPercent.T}}%"></view>
+        </view>
+        <view class="dimension-percent">
+          <text class="percent-text">{{dimensionPercent.T}}%</text>
+          <text class="percent-text">{{dimensionPercent.F}}%</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- J/P 维度 -->
+    <view class="dimension-row">
+      <view class="dimension-labels">
+        <text class="dim-label {{dimensionPercent.J >= dimensionPercent.P ? 'dim-label-active' : ''}}">J 计划型</text>
+        <text class="dim-label {{dimensionPercent.P > dimensionPercent.J ? 'dim-label-active' : ''}}">P 随性型</text>
+      </view>
+      <view class="dimension-bar-container">
+        <view class="dimension-bar-bg">
+          <view class="dimension-bar-fill bar-gold" style="width: {{dimensionPercent.J}}%"></view>
+        </view>
+        <view class="dimension-percent">
+          <text class="percent-text">{{dimensionPercent.J}}%</text>
+          <text class="percent-text">{{dimensionPercent.P}}%</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 优劣势展示 -->
+  <view class="traits-card card" wx:if="{{personality && showDetail}}">
+    <view class="card-header">
+      <text class="card-title">💪 优势 / ⚠️ 劣势</text>
+    </view>
+    <view class="traits-row">
+      <view class="traits-col strengths">
+        <view class="trait-item" wx:for="{{personality.strengths}}" wx:key="index">
+          <text class="trait-icon">✅</text>
+          <text class="trait-text">{{item}}</text>
+        </view>
+      </view>
+      <view class="traits-col weaknesses">
+        <view class="trait-item" wx:for="{{personality.weaknesses}}" wx:key="index">
+          <text class="trait-icon">⚠️</text>
+          <text class="trait-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 投资忠告 -->
+  <view class="advice-card card" wx:if="{{personality && showDetail}}">
+    <view class="card-header">
+      <text class="card-title">💡 投资忠告</text>
+    </view>
+    <text class="advice-text">{{personality.advice}}</text>
+  </view>
+
+  <!-- 标签展示 -->
+  <view class="tags-section" wx:if="{{personality && showDetail}}">
+    <view class="tag-item" wx:for="{{personality.tags}}" wx:key="index">
+      <text class="tag-text">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 底部按钮区域 -->
+  <view class="bottom-actions" wx:if="{{showDetail}}">
+    <button class="btn-share" open-type="share">
+      <text class="btn-share-text">📢 分享给股友</text>
+    </button>
+    <button class="btn-retest" bindtap="retest">
+      <text class="btn-retest-text">🔄 重新测试</text>
+    </button>
+  </view>
+
+  <!-- 底部声明 -->
+  <view class="footer-notice" wx:if="{{showDetail}}">
+    <text class="footer-text">— 纯属娱乐，不构成投资建议 —</text>
+  </view>
+</view>
