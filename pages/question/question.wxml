@@ -3,8 +3,8 @@
   <!-- 进度条区域 -->
   <view class="progress-section">
     <view class="progress-info">
-      <text class="progress-text">{{currentIndex + 1}} / {{totalQuestions}}</text>
       <text class="progress-hint">耐心作答，答案无对错</text>
+      <text class="progress-text">{{currentIndex + 1}} / {{totalQuestions}}</text>
     </view>
     <view class="progress-bar-bg">
       <view class="progress-bar-fill" style="width: {{progress}}%"></view>
@@ -36,7 +36,7 @@
           <text class="indicator-text">A</text>
         </view>
         <text class="option-text">{{currentQuestion.optionA.text}}</text>
-        <view class="option-check" wx:if="{{selectedOption === 1}}">✓</view>
+        <view class="option-check {{selectedOption === 1 ? 'check-visible' : 'check-hidden'}}">✓</view>
       </view>
 
       <!-- 选项B -->
@@ -49,7 +49,7 @@
           <text class="indicator-text">B</text>
         </view>
         <text class="option-text">{{currentQuestion.optionB.text}}</text>
-        <view class="option-check" wx:if="{{selectedOption === 2}}">✓</view>
+        <view class="option-check {{selectedOption === 2 ? 'check-visible' : 'check-hidden'}}">✓</view>
       </view>
     </view>
   </view>

@@ -3,6 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   min-height: 100vh;
   padding: 30rpx 32rpx;
   box-sizing: border-box;
@@ -11,25 +12,27 @@
 
 /* 进度条区域 */
 .progress-section {
-  margin-bottom: 40rpx;
+  margin-bottom: 48rpx;
 }
 
 .progress-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16rpx;
+  margin-bottom: 20rpx;
 }
 
 .progress-text {
-  font-size: 28rpx;
+  font-size: 32rpx;
   color: var(--color-primary);
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 2rpx;
 }
 
 .progress-hint {
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: var(--color-text-muted);
+  font-style: italic;
 }
 
 .progress-bar-bg {
@@ -50,6 +53,9 @@
 /* 题目区域 */
 .question-section {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
@@ -109,6 +115,8 @@
   padding: 48rpx 40rpx;
   margin-bottom: 36rpx;
   border: 1rpx solid var(--color-border);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .question-number {
@@ -133,6 +141,7 @@
   display: flex;
   flex-direction: column;
   gap: 24rpx;
+  width: 100%;
 }
 
 .option-card {
@@ -142,9 +151,11 @@
   border: 2rpx solid var(--color-border);
   border-radius: 20rpx;
   padding: 32rpx 28rpx;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .option-card:active {
@@ -235,7 +246,7 @@
   line-height: 1.5;
 }
 
-/* 选中勾 */
+/* 选中勾 — 始终占位，避免选中后宽度跳变 */
 .option-check {
   width: 44rpx;
   height: 44rpx;
@@ -247,14 +258,25 @@
   font-weight: 700;
   margin-left: 12rpx;
   flex-shrink: 0;
+  transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.option-check.check-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.option-check.check-visible {
+  opacity: 1;
+  visibility: visible;
   color: #ffffff;
 }
 
-.option-active-a .option-check {
+.option-active-a .option-check.check-visible {
   background: var(--color-primary);
 }
 
-.option-active-b .option-check {
+.option-active-b .option-check.check-visible {
   background: var(--color-gold);
   color: #1a1a2e;
 }
